@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEL제능스스로교육</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--우측, 좌측 메뉴 나타내기 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 슬라이드 스크립트 -->
+    <script src="js/jquery-v1.10.2.min.js" type="text/javascript"></script>
+	<link href="css/flickerplate.css"  type="text/css" rel="stylesheet">
+    <script src="js/flickerplate.min.js" type="text/javascript"></script>
+
+<script>
+/*-- 우측, 좌측 메뉴 나타내기 --  */
+$(document).ready(function(){
+    mobile_menu();
+});
+
+function mobile_menu(){
+    /* 변수 선언 */
+    var $menu = null;
+    var $left_gnb = null; // 영역 전체
+    var $depth1_wrap = null;
+    var $depth1 = null;
+    var $depth1_btn = null;
+    
+    /* 시작 함수 */
+    function start(){
+        init();
+        init_event();
+    }
+    /* 변수 초기화 함수 */
+    function init(){
+        $menu = $('.m_menu');
+        $left_gnb = $('.left_gnbWrap'); // 영역 전체
+        $depth1_wrap = $('.left_gnb>li');
+        $depth1 = $depth1_wrap.children('ul');
+        $depth1_btn = $depth1_wrap.children('a');
+    }
+    /* 이벤트 함수 */
+    function init_event(){
+        
+        /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+        $menu.click(function(event){
+            event.preventDefault();
+            $left_gnb.addClass('on');
+        });
+        
+        /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+        $('.close').click(function(event){
+            event.preventDefault();
+
+            $left_gnb.removeClass('on');
+            
+            // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+            setTimeout(function(){
+                $depth1_btn.removeClass('on');
+                $depth1.slideUp();
+            },300)
+        });
+        
+        /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+        $depth1_btn.click(function(event){
+            event.preventDefault();
+            var $this = $(this);
+            var $this_ul = $this.siblings('ul');
+
+            var check = $this.hasClass('on');
+            if(check){
+                $this.removeClass('on');
+                $this_ul.stop(true,true).slideUp();
+            }else{
+                $depth1_btn.removeClass('on');
+                $depth1.stop().slideUp();
+                $this.addClass('on');
+                $this_ul.stop(true,true).slideDown();
+            }
+        });
+        
+        /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+        $(window).resize(function(){
+            $left_gnb.removeClass('on');
+        });
+    }
+    
+    start(); // 시작 호출
+}
+/* 우측, 좌측 메뉴 나타내기 */
+    
+/* 메인 슬라이드 스크립트 */
+	$(document).ready(function(){
+		
+		$('.mainimg_sl').flicker();
+	});
+    
+/* 메인 슬라이드 스크립트 */
+    
+</script>
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li>학생</li>
+                        <li>학부모</li>
+                        <li>
+                            <select>
+                                <option>&nbsp;&nbsp;지역별</option>
+                                <option>&nbsp;&nbsp;서울</option>
+                                <option>&nbsp;&nbsp;인천</option>
+                                <option>&nbsp;&nbsp;세종</option>
+                                <option>&nbsp;&nbsp;대전</option>
+                                <option>&nbsp;&nbsp;대구</option>
+                                <option>&nbsp;&nbsp;경주</option>
+                                <option>&nbsp;&nbsp;부산</option>
+                                <option>&nbsp;&nbsp;거제</option>
+                            </select>
+                        </li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <ul class="util">
+                        <li>로그인</li>
+                        <li>회원가입</li>
+                        <li>회사소개</li>
+                        <li>선생님초빙</li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <ul class="menu">
+                        <li><a href="sub.html">스스로 이야기</a></li>
+                        <li><a href="sub.html">스스로의 힘</a></li>
+                        <li><a href="sub.html">스스로 상품</a></li>
+                        <li><a href="sub.html">학습은 이렇게</a></li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <div class="logo"><a href="index.html">
+                        <img src="img/logo.png" alt="로고"></a>
+                    </div>
+                    <div class="sub_menu">
+                        <ul class="side">
+                            <li>무료상담신청</li>
+                            
+                        </ul>
+                        <div class="search">
+                            <img src="img/ico_search.png" alt="검색">
+                        </div>
+                        <div class="m_menu">
+                            <a href="#"><img src="img/ico_menu.png" alt="메뉴버튼"></a>
+                        </div>
+                         <nav class="left_gnbWrap">
+            <a href="#" class="close">전체보기<span></span></a>
+            <ul class="left_gnb">
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로 이야기</a>
+                    <ul>
+                        <li><a href="#">학습시스템 이야기</a></li>
+                        <li><a href="#">학습출발점 이야기</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로의 힘</a>
+                    <ul>
+                        <li><a href="#">회원 변화 이야기</a></li>
+                        <li><a href="#">회원 성공 이야기</a></li>
+                        <li><a href="#">맘대로키워라 (웹진)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로 상품</a>
+                    <ul>
+                        <li><a href="#">유아맘이라면?</a></li>
+                        <li><a href="#">초등이상 맘이라면?</a></li>
+                        <li><a href="#">이벤트·혜택</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;학습은 이렇게</a>
+                    <ul>
+                        <li><a href="#">학습진행은 이렇게</a></li>
+                        <li><a href="#">재능스스로 선생님</a></li>
+                        <li><a href="#">학습상담 앱</a></li>
+                        <li><a href="#">꼼꼼질문방</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+                        <!-- :after으로 clear:both -->
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </header>
+        <article id="mainimg">
+            <h1 class="hidden">메인이미지</h1>
+            <div class="mainimg_sl">
+            <ul>
+                <li></li><li></li><li></li>
+            </ul>
+            </div>
+        </article>
+        <main id="contents">
+            <section class="best_set">
+                <h1 class="hidden">BEST 상품</h1>
+                <div class="besttitle">
+                    <!-- :before으로 position:absolute밑줄 -->
+                    <h2>BEST 상품</h2>
+                    <p>가장 인기있는 상품만 모아서</p>
+                </div>
+                <div class="bestslider">
+                    <div class="btn_prev1">
+                        <img src="img/slick-prev2.png" alt="이전">
+                    </div>
+                    <div class="best_list">
+                        <div class="slide">
+                            <img src="img/Asset%204-100.jpg" alt="재능스스로한글">
+                        </div>
+                        <div class="slide">
+                            <img src="img/Asset%205-100.jpg" alt="재능스스로영어">
+                        </div>
+                        <div class="slide">
+                            <img src="img/Asset%206-100.jpg" alt="재능스스로수학">
+                        </div>
+                        <!-- :after으로 clear:both -->
+                    </div>
+                    <div class="btn_next2">
+                        <img src="img/slick-next2.png" alt="다음">
+                    </div>
+                </div>
+                <div class="bestdata">
+                    <div class="data_box">
+                        <dl>
+                            <dt>주1회방문/선생님과 함께</dt>
+                            <dd>
+                                <ul>
+                                    <li>39,900 <span>원(권당)/월</span></li>
+                                    <li>1년 약정시</li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <i class="plus">
+                            <img src="img/i_plus.png" alt="plus">
+                        </i>
+                        <dl>
+                            <dt>"스스로 펜"과 함께</dt>
+                            <dd>
+                                <ul>
+                                <li><span>월</span> 39,000 <span>원</span></li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        <i class="sum">
+                            <img src="img/i_sum.png" alt="sum">
+                        </i>
+                        <dl>
+                            <dt><span>묶음할인</span> 78,000 <span>원/월</span></dt>
+                            <dd>부가세포함</dd>
+                        </dl>
+                        <!-- :after으로 clear:both -->
+                    </div>
+                    <div class="data_btn">가입상담 받기</div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </section>
+            <section class="banner_set">
+                <h1 class="hidden">초특가 단체 가입안내</h1>
+                <div class="inner">
+                    <div class="bnn_txt">
+                        <h3>내 손안의 <span>원어민 스마트 선생님</span></h3>
+                        <p>듣기 말하기 중심의 실용 어학학습도구 <span>스스로 펜</span>으로<br>언제 어디서나 즐겁게 공부하세요!</p>
+                        <h3>내 손안의<br><span>원어민 스마트 선생님</span></h3>
+                        <P>듣기 말하기 중심의 실용<br>어학학습도구 <span>스스로펜</span>으로<br>언제 어디서나 즐겁게 공부하세요!</P>
+                    </div>
+                    <div class="redpen">
+                        <img src="img/redpen.png" alt="재능 스스로펜">
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </section>
+            <section class="vod_set">
+                <h1 class="hidden">스스로 북 소개</h1>
+                <h2>스스로 북 소개</h2>
+                <div class="vodslider">
+                    <div class="btn_prev3">
+                        <img src="img/slick-prev.png" alt="이전">
+                    </div>
+                    <div class="vod_list">
+
+                        <div class="vslide">
+                            <img src="img/selfbook01.jpg" alt="영화1">
+                            <h4>보들보들 털 뭉치</h4>
+                            <p>귀엽고 솜털 같이 보들보들한 털을 가진<br>토끼의 이야기 속 단어와 문장을 배워요.</p>
+                            <div class="slide_hidden">
+                                <h2>보들보들털 뭉치</h2>
+                                <p>동물들의 이름들과 동작과<br>표현, 그리고 소리를 나타낸<br>단어와 문장을 배워요.</p>
+                            </div>
+                        </div>
+                        <div class="vslide">
+                            <img src="img/selfbook02.jpg" alt="영화2">
+                            <h4>생각하는 P!zzaa</h4>
+                            <p>여러가지 작은 조각들이 뭉쳐서 만들어진<br>피자처럼 생각이 모여 만들어진 세상.</p>
+                            <div class="slide_hidden">
+                                <h2>생각하는 P!zzaa</h2>
+                                <p>큰 피자는 작은 피자들의<br>모임이에요. 여러 생각들을 <br>모아서 큰 꿈을 그려보아요.</p>
+                            </div>
+                        </div>
+                        <div class="vslide">
+                            <img src="img/selfbook03.jpg" alt="영화3">
+                            <h4>별떡 달떡</h4>
+                            <p>각자의 동물들이 저마다 다르게 만드는<br>떡을 통해서 서로다름을 인정해가요. </p>
+                            <div class="slide_hidden">
+                                <h2>별떡 달떡</h2>
+                                <p>숲 속의 여러 동물들이 모여<br>별떡과 달떡을 만들어요.<br>여러 모양들의 떡들을<br> 구경해봐요.</p>
+                            </div>
+                        </div>
+                        <!-- :after으로 clear:both -->
+
+                    </div>
+                    <div class="btn_next4">
+                        <img src="img/slick-next.png" alt="다음">
+                    </div>
+                </div>
+            </section>
+            <section class="homeliving_set">
+                <h1 class="hidden">스스로 학습 상품</h1>
+                <h2>스스로 학습 상품</h2>
+                <p>다양하게 준비되어진 스스로 학습 상품을 만나보세요.</p>
+                <ul>
+                    <li>
+                        <i>
+                            <img src="img/Main_JEI-image13.png" alt="유아자녀">
+                        </i>
+                        <p>유아 자녀</p>
+                    </li>
+                    <li>
+                        <i><img src="img/Main_JEI-image14.png" alt="초등이상 자녀"></i>
+                        <p>초등이상 자녀</p>
+                    </li>
+                    <li>
+                        <i><img src="img/Main_JEI-image16.png" alt="앱코딩 학습"></i>
+                        <p>앱·코딩 학습</p>
+                    </li>
+                    <li>
+                        <i><img src="img/Main_JEI-image15.png" alt="평생교육 성인층"></i>
+                        <p>평생교육 성인층</p>
+                    </li>
+                    <!-- :after으로 clear:both -->
+                </ul>
+            </section>
+            <section class="add_set">
+                <h1 class="hidden">방송광고</h1>
+                <h2>다양한 스스로 학습교재 보기</h2>
+                <p>재능교육 스스로 학습을 통해서<br>다방면에 학습을 느껴보세요.</p>
+                <div>살펴보기</div>
+            </section>
+            <section class="board_set">
+                <h1 class="hidden">공지사항</h1>
+                <h2>공지사항</h2>
+                <p>재능교육 입회 및 회비관련 약관 변경 안내</p>
+                <ul>
+                    <li class="date">2020-04-24</li>
+                    <li class="more">MORE</li>
+                    <!-- :after으로 clear:both -->
+                </ul>
+                <!-- :after으로 clear:both -->
+            </section>
+        </main>
+        <footer id="footer">
+            <div class="top_footer">
+                <div class="inner">
+                    <ul>
+                        <li>개인정보처리방침</li>
+                        <li>지국찾기</li>
+                        <li>문의하기</li>
+                        <li>찾아오시는 길</li>
+                        <li>현금영수증서비스</li>
+                        
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_footer">
+                <div class="inner">
+                    <div class="f_logo">
+                        <img src="img/logo_btm.png" alt="하단로고">
+                    </div>
+                    <div class="copyright">
+                        <ul>
+                            <li><span>주소</span>서울시 종로구 창경궁로 293 (주)재능교육</li>
+                            <li><span>대표자</span>박종우</li>
+                            <li><span>사업자등록번호</span>204-81-03990</li>
+                            <li><span>개인정보보호책임자</span>김현태</li>
+                        </ul>
+                        <p class="c_right">Copyright © 2020 HYUNDAI HCN All rights reserved.</p>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li><span>고객센터</span> 1588-1132</li>
+                            <li>answer@jei.com<span>(이메일문의)</span></li>
+                            <!-- :after으로 clear:both -->
+                        </ul>
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현대HCN</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!-- J Quarry 자바스크립트 부분 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    mobile_menu();
+});
+
+function mobile_menu(){
+    /* 변수 선언 */
+    var $menu = null;
+    var $left_gnb = null; // 영역 전체
+    var $depth1_wrap = null;
+    var $depth1 = null;
+    var $depth1_btn = null;
+    
+    /* 시작 함수 */
+    function start(){
+        init();
+        init_event();
+    }
+    /* 변수 초기화 함수 */
+    function init(){
+        $menu = $('.m_menu');
+        $left_gnb = $('.left_gnbWrap'); // 영역 전체
+        $depth1_wrap = $('.left_gnb>li');
+        $depth1 = $depth1_wrap.children('ul');
+        $depth1_btn = $depth1_wrap.children('a');
+    }
+    /* 이벤트 함수 */
+    function init_event(){
+        
+        /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+        $menu.click(function(event){
+            event.preventDefault();
+            $left_gnb.addClass('on');
+        });
+        
+        /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+        $('.close').click(function(event){
+            event.preventDefault();
+
+            $left_gnb.removeClass('on');
+            
+            // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+            setTimeout(function(){
+                $depth1_btn.removeClass('on');
+                $depth1.slideUp();
+            },300)
+        });
+        
+        /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+        $depth1_btn.click(function(event){
+            event.preventDefault();
+            var $this = $(this);
+            var $this_ul = $this.siblings('ul');
+
+            var check = $this.hasClass('on');
+            if(check){
+                $this.removeClass('on');
+                $this_ul.stop(true,true).slideUp();
+            }else{
+                $depth1_btn.removeClass('on');
+                $depth1.stop().slideUp();
+                $this.addClass('on');
+                $this_ul.stop(true,true).slideDown();
+            }
+        });
+        
+        /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+        $(window).resize(function(){
+            $left_gnb.removeClass('on');
+        });
+    }
+    
+    start(); // 시작 호출
+}
+</script>
+
+</head>
+
+<body>
+    <div id="wrap">
+   <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li>학생</li>
+                        <li>학부모</li>
+                        <li>
+                            <select>
+                                <option>&nbsp;&nbsp;지역별</option>
+                                <option>&nbsp;&nbsp;서울</option>
+                                <option>&nbsp;&nbsp;인천</option>
+                                <option>&nbsp;&nbsp;세종</option>
+                                <option>&nbsp;&nbsp;대전</option>
+                                <option>&nbsp;&nbsp;대구</option>
+                                <option>&nbsp;&nbsp;경주</option>
+                                <option>&nbsp;&nbsp;부산</option>
+                                <option>&nbsp;&nbsp;거제</option>
+                            </select>
+                        </li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <ul class="util">
+                        <li>로그인</li>
+                        <li>회원가입</li>
+                        <li>회사소개</li>
+                        <li>선생님초빙</li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <ul class="menu">
+                        <li><a href="#">스스로 이야기</a></li>
+                        <li><a href="sub1.html">스스로의 힘</a></li>
+                        <li><a href="#">스스로 상품</a></li>
+                        <li><a href="#">학습은 이렇게</a></li>
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                    <div class="logo">
+                        <a href="index.html"><img src="img/logo.png" alt="로고"></a>
+                    </div>
+                    <div class="sub_menu">
+                        <ul class="side">
+                            <li>무료상담신청</li>
+                            
+                        </ul>
+                        <div class="search">
+                            <img src="img/ico_search.png" alt="검색">
+                        </div>
+                        <div class="m_menu">
+                            <a href="#"><img src="img/ico_menu.png" alt="메뉴버튼"></a>
+                        </div>
+                                     <nav class="left_gnbWrap">
+            <a href="#" class="close">close</a>
+            <ul class="left_gnb">
+                <li>
+                         <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로 이야기</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로의 힘</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;스스로 상품</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;학습은 이렇게</a>
+                    <ul>
+                        <li><a href="#">sub1</a></li>
+                        <li><a href="#">sub2</a></li>
+                        <li><a href="#">sub3</a></li>
+                        <li><a href="#">sub4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+                        <!-- :after으로 clear:both -->
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </header>
+    <main id="sub1_contents">
+    
+            <section class="subtitlebodyimg">
+               <h1 class="hidden">서브페이지의 메인이미지</h1>
+               
+            </section>
+            
+            <section class="goods_txt">
+               <h1 class="hidden">서브페이지의 콘텐츠</h1>
+               
+              <div class="goodstitle">
+                   <h2><i><img src="img/bookpen.png"></i>
+                    <span>재능 학습지</span>와 함께하는 <span>똑똑한 수업</span></h2>
+                </div>
+                
+              <div class="goodsspec">
+                                   <dl>
+                        <dt><i><img src="img/Asset1.png" alt="학습하기"></i>학습하기</dt>
+                        <dd>
+                            <ul>
+                                <li>재능 스스로펜으로 원어민 발음 듣기</li>
+                                <li>단어와 문장, 노래 듣기</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="img/Asset2.png" alt="스티커북"></i>스티커북 활용</dt>
+                        <dd>
+                            <ul>
+                                <li>스티커북 전용 스티커의 녹음·재생기능</li>
+                                <li>언제 어디서든지 소리를 활용한 학습 가능</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="img/Asset3.png" alt="제품·회원인증"></i>제품·회원 인증</dt>
+                        <dd>
+                            <ul>
+                                <li>제품 시리얼번호 등록과 회원인증</li>
+                                <li>기기관리와 A/S신청</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="img/Asset4.png" alt="음원관리"></i>음원다운</dt>
+                        <dd>
+                            <ul>
+                                <li>음원관리 매니저 프로그램 설치방법</li>
+                                <li>학습진도에 맞는 음원 선택 다운로드</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i><img src="img/Asset5.png" alt="펌웨어업데이트"></i>펌웨어업데이트</dt>
+                        <dd>
+                            <ul>
+                                <li>펌웨어가 항상 최신 버전이도록 성능유지</li>
+                                <li>펌웨어 관련 질문과 답변</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                  <dl>
+                        <dt><i><img src="img/Asset6.png" alt="리셋과포맷하기"></i>리셋·포맷하기</dt>
+                        <dd>
+                            <ul>
+                                <li>리셋·초기화 방법 설명</li>
+                                <li>녹음된 소리는 보관방법 설명</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <!-- SPACE 효과 주기 -->
+                </div>
+            </section>
+            
+            <section class="goods_price">
+                <h1 class="hidden">상품 요금 안내</h1>
+                <h3>상품요금안내</h3>
+            <div class="goods_detail">
+                 <div class="spce_l">
+                        <i class="i_smartgoldHd"><img src="img/expprice.png" alt="스마트HD 골드"></i>
+                        <p class="txt1">2과목 선택</p>
+                        <p class="btn_view">스스로펜</p>
+                        <p class="txt2">69,000원(기존) <span>59,600</span>원(할인가)</p>
+                        <p class="btnHD1">가입상담 신청</p>
+                </div>
+                <div class="spce_r">
+                        <i class="i_smartgoldHd"><img src="img/expprice.png" alt="스마트HD 실버"></i>
+                        <p class="txt1">3과목 선택</p>
+                        <p class="btn_view">스스로펜</p>
+                        <p class="txt2">69,000원(기존) <span>49,000</span>원(할인가)</p>
+                        <p class="btnHD1">가입상담 신청</p>
+                </div>
+                    <!-- :after으로 clear:both -->
+            </div>
+            <ul class="goods_list">
+                    <li>2년 약정 기준 (A/S기간은 구매후 2년간)</li>
+                    <li>서비스 이용료, 제품 배송비 등은 지역(국내, 해외)에 따라 금액이 상이할 수 있습니다.</li>
+                </ul>
+            </section>
+            
+            
+        </main>
+      
+        <footer id="footer">
+            <div class="top_footer">
+                <div class="inner">
+                    <ul>
+                        <li>개인정보처리방침</li>
+                        <li>지국찾기</li>
+                        <li>문의하기</li>
+                        <li>찾아오시는 길</li>
+                        <li>현금영수증서비스</li>
+                        
+                        <!-- :after으로 clear:both -->
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom_footer">
+                <div class="inner">
+                    <div class="f_logo">
+                        <img src="img/logo_btm.png" alt="하단로고">
+                    </div>
+                    <div class="copyright">
+                        <ul>
+                            <li><span>주소</span>서울시 종로구 창경궁로 293 (주)재능교육</li>
+                            <li><span>대표자</span>박종우</li>
+                            <li><span>사업자등록번호</span>204-81-03990</li>
+                            <li><span>개인정보보호책임자</span>김현태</li>
+                        </ul>
+                        <p class="c_right">Copyright © 2020 HYUNDAI HCN All rights reserved.</p>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li><span>고객센터</span> 1588-1132</li>
+                            <li>answer@jei.com<span>(이메일문의)</span></li>
+                            <!-- :after으로 clear:both -->
+                        </ul>
+                    </div>
+                    <!-- :after으로 clear:both -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</body></html>
